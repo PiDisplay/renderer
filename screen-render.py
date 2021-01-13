@@ -1,16 +1,21 @@
 import socket
 import time
+import atexit
 import os, sys
 from PIL import Image
 
-# if socket.gethostname() == "rpiv2":
 import gfxcili.ili9486
     # width, height, SPI, SPEED, CS, RST, RS
 lcd = gfxcili.ili9486.ili9486(480, 320, 0, 3200000, 8, 25, 24)
 lcd.rotation = 270
 lcd.init()
 
+# Cleanup on exit
+def clear_screen():
+    # Black the screen
+    lcd.color = (0,0,0)
 
+atexit.register(clear_screen)
 
 while True:
     old_image = None
@@ -34,4 +39,3 @@ while True:
     lcd.draw_image(0,0, img)
     
     time.sleep(5)
-
