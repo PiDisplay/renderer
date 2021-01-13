@@ -14,8 +14,17 @@ lcd.init()
 
 while True:
     old_image = None
-
-    img = Image.open("/usr/screenshots/UmbrUI.png")
+    
+    try:
+        img = Image.open("/usr/screenshots/UmbrUI.png")
+    except:
+        # If there is no screenshot wait 5 for the app to start
+        time.sleep(5)
+        continue
+    
+    # If the image has not changed do not update the screen
+    if old_image == img:
+        continue
 
     # Resize to correctly fit the screen
     basewidth = 480
