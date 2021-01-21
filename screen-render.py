@@ -21,7 +21,8 @@ while True:
     old_image = None
     
     try:
-        img = Image.open("/usr/screenshots/UmbrUI.png")
+        img = Image.open("/usr/screenshots/UmbrUI.png").convert('RGB')
+        img = ImageOps.invert(img)
     except:
         # If there is no screenshot wait 5 for the app to start
         time.sleep(5)
