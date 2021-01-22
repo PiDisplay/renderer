@@ -2,7 +2,7 @@ import socket
 import time
 import atexit
 import os, sys
-from PIL import Image
+from PIL import Image, ImageOps
 
 import gfxcili.ili9486
     # width, height, SPI, SPEED, CS, RST, RS
