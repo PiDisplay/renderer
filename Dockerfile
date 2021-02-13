@@ -18,6 +18,7 @@ FROM python:3.7-slim
 WORKDIR /
 
 RUN apt-get update
+# Runtime dependencies
 RUN apt-get install -y make libjpeg62-turbo libpng16-16 libpng-tools
 
 COPY --from=builder /WiringPi /WiringPi
