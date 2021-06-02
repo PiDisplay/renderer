@@ -26,9 +26,9 @@ COPY --from=builder /WiringPi /WiringPi
 WORKDIR /WiringPi
 RUN cd wiringPi && make install && cd ../devLib && make install && cd ../gpio && make install
 
-RUN apt-get install -y gcc g++ libjpeg-dev libpng-dev && pip3 install gfxcili pillow && apt-get remove -y gcc g++ libjpeg-dev libpng-dev && apt-get autoremove -y && apt-get clean
+RUN apt-get install -y gcc g++ libjpeg-dev libpng-dev && pip3 install gfxcili pillow && apt-get remove -y gcc g++ libjpeg-dev libpng-dev && apt-get autoremove -y && apt-get clean && mkdir /app
 
-WORKDIR /code
+WORKDIR /app
 COPY . .
 
 CMD ["python3", "screen-render.py"]
