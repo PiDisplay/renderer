@@ -3,6 +3,7 @@ import time
 import atexit
 import os, sys
 from PIL import Image, ImageOps
+import json
 
 import gfxcili.ili9486
     # width, height, SPI, SPEED, CS, RST, RS
@@ -22,7 +23,11 @@ while True:
     
     try:
         img = Image.open("/usr/screenshots/UmbrUI.png").convert('RGB')
-        img = ImageOps.invert(img)
+        with open("./data/layout.json") as f:
+            userData = json.loads(f.read())
+        old_image = img
+        if(userData["ivnertColors"] == True):
+            img = ImageOps.invert(img)
     except:
         # If there is no screenshot wait 5 for the app to start
         time.sleep(5)
