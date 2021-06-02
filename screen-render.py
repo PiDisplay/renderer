@@ -22,7 +22,7 @@ while True:
     old_image = None
     
     try:
-        img = Image.open("/usr/screenshots/UmbrUI.png").convert('RGB')
+        img = Image.open("./data/screenshots/screen.png").convert('RGB')
         with open("./data/layout.json") as f:
             userData = json.loads(f.read())
         old_image = img
