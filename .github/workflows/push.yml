@@ -12,11 +12,6 @@ jobs:
   build:
     name: Build image
     runs-on: ubuntu-20.04
-    strategy:
-      fail-fast: false
-      matrix:
-        platform:
-          - linux/arm64
     steps:
       - name: Checkout project
         uses: actions/checkout@v2
@@ -42,12 +37,11 @@ jobs:
       - name: Show available Docker buildx platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
 
-     
       - name: Run Docker buildx
         run: |
                 docker buildx build \
                 --cache-from "type=local,src=/tmp/.buildx-cache" \
                 --cache-to "type=local,dest=/tmp/.buildx-cache" \
-                --platform ${{matrix.platform}} \
-                --tag ${{ secrets.DOCKER_CONTAINER_USERNAME }}/umbrui-renderer:$BRANCH \
+                --platform linux/arm64 \
+                --tag ${{ secrets.DOCKER_CONTAINER_USERNAME }}/renderer:$BRANCH \
                 --output "type=registry" ./
